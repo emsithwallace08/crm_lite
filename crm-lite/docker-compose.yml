@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: crmlite
+      POSTGRES_PASSWORD: crmlite
+      POSTGRES_DB: crmlite
+    ports:
+      - "5432:5432"
+    volumes:
+      - crm-lite-db:/var/lib/postgresql/data
+
+volumes:
+  crm-lite-db:
