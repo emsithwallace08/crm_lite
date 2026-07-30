@@ -1,8 +1,11 @@
-# CRM Lite
+# CLAUDE.md
 
-A small business CRM: contacts and a sales pipeline (deals moving through stages).
-This is a starter repo for a LiftOff Summer session — pick a ticket from `ISSUES.md`
-and use Claude Code to implement it.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## CRM Lite
+
+A small business CRM: contacts and a sales pipeline (deals moving through stages),
+built with Next.js, Prisma, and Postgres.
 
 ## Commands
 
@@ -12,6 +15,8 @@ pnpm db:up         # start local Postgres via Docker (skip if using a hosted DB)
 pnpm db:push       # sync prisma/schema.prisma to your database
 pnpm db:seed       # load demo contacts and deals
 pnpm dev           # start the app at http://localhost:3000
+pnpm lint          # eslint
+pnpm build         # prisma generate + next build (validates the whole app compiles)
 pnpm db:studio     # browse/edit the database in a GUI
 pnpm db:reset      # wipe the DB, re-push schema, re-seed (use if data gets messy)
 pnpm db:down       # stop the local Docker Postgres
@@ -22,6 +27,9 @@ Fresh clone, from zero (Docker Postgres): copy `.env.example` to `.env`, then
 
 No Docker? Comment out the `DATABASE_URL` in `.env` and use a free Neon/Supabase
 instance instead (see `.env.example`), then skip `pnpm db:up`/`db:down`.
+
+There is no test suite in this repo — verify changes by running `pnpm dev` and
+checking the browser, plus `pnpm lint` and `pnpm build` for type/compile errors.
 
 ## Stack
 
@@ -61,6 +69,8 @@ app/api/contacts/, app/api/deals/   # REST-ish API routes (GET/POST/PATCH/DELETE
 - API routes return the model JSON directly — no `{ data: ... }` wrapper envelope.
 - Server components fetch directly via `prisma`; client components (forms) call
   the `/api/*` routes and `router.refresh()` afterward.
+- Dynamic route params are async (Next.js 16): `{ params }: { params: Promise<{ id: string }> }`,
+  so handlers/pages must `await params` before use.
 
 ## What NOT to touch
 
@@ -73,6 +83,5 @@ app/api/contacts/, app/api/deals/   # REST-ish API routes (GET/POST/PATCH/DELETE
 
 ## How to pick up work
 
-1. Read `ISSUES.md`, pick one unclaimed ticket.
-2. Keep your change scoped to that ticket — small, reviewable diffs.
-3. Run `pnpm dev` and check your change in the browser before considering it done.
+1. Keep changes small and scoped to a single, reviewable diff.
+2. Run `pnpm dev` and check your change in the browser before considering it done.
