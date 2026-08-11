@@ -1,5 +1,5 @@
 ---
-description: Architecture and design standards for planning features, reviewing system structure, and evaluating technical approaches.
+description: Architecture and design standards for planning features, reviewing system structure, and evaluating technical approaches.  
 ---
 
 # Architecture Standards
