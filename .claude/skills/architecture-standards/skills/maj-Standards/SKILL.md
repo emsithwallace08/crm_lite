@@ -1,4 +1,4 @@
----
+---skills
 description:  Analyzing issues to identify the main problem, who the problem effects, the steps to achive the soloution, possibles changes within the problem,and how the solution will benifit our client.
 ---
 # maj Standards
